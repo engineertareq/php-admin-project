@@ -48,15 +48,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="students/student-entry.php" class="nav-link">
+                <a href="<?php echo $admin_url ?>students/student-entry.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Student</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/forms/advanced.html" class="nav-link">
+                <a href="<?php echo $admin_url ?>students/index.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Advanced Elements</p>
+                  <p>See Students</p>
                 </a>
               </li>
               <li class="nav-item">
