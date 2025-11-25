@@ -33,7 +33,17 @@
             <?php
     if(isset($_POST['submit'])):
     extract($_POST);
-    $sql = "INSERT INTO students VALUES (NULL, '$fname', '$lname', '$dob', '$notes')";
+   
+   
+     if(isset(($_FILES['photo']))){
+          $photo_name = $_FILES['photo']['name'];
+     $tmp_name = $_FILES['photo']['tmp_name'];
+     $upload_path = "uploads/";
+     $fullpath = $upload_path . $photo_name;
+     move_uploaded_file($tmp_name, "uploads/" . $photo_name);
+     }
+
+    $sql = "INSERT INTO students VALUES (NULL, '$fname', '$lname', '$dob', '$notes', '$fullpath')";
     $db->query($sql);
     if($db->affected_rows){
     echo "Inserted Succesfully"."<hr>"; 
@@ -64,7 +74,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form id="quickForm" action="" method="post">
+              <form id="quickForm" action="" method="post" enctype="multipart/form-data">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">First Name</label>
@@ -82,6 +92,11 @@
                     <label for="exampleInputPassword1">Notes</label>
                     <textarea name="notes" class="form-control" rows="4" id=""></textarea>
                   </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Photo</label>
+                    <input type="file" name="photo" class="form-control"  placeholder="">
+                  </div>
+
                   
                 </div>
                 <!-- /.card-body -->

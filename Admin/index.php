@@ -16,35 +16,40 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
-    <?php
-      if(isset($_POST['login'])) {
-        include_once 'inc/config.php';
-        extract($_POST);
-        $password=md5($password);
-       $sql = "SELECT * FROM admins WHERE email='$email' AND password='$password'";
-       $record = $db->query($sql);
-     
-       if ($record->num_rows > 0) {
-          session_start();
-          $_SESSION['admin'] = $email;
-          header("Location: dashboard.php");
-       } else {
-          echo "<div class='alert alert-danger'>Invalid Email or Password</div>";
-       }
+  <?php
+  if(isset($_POST['login'])){
+    include_once("inc/config.php");
+    extract($_POST);
+    $password=md5($password);
+    $sql="SELECT * FROM admins WHERE email='$email' AND password='$password'";
+   $record= $db->query($sql);
+   $row=  $record->fetch_assoc();
 
-      }
-    ?>
+  //  echo $record->num_rows;
+  if($record->num_rows>0){
+    session_start();
+    $_SESSION['loggedin']=TRUE;
+    $_SESSION['email']=$email;
+    $_SESSION['name']=$row['name'];
+  
+    header("Location:dashboard.php");
+
+  }
+    
+  }
+  
+  ?>
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="index2.html" class="h1"><b>Admin</b>LTE</a>
+      <a href="index2.html" class="h1"><b>Login</b>From</a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
-
+     
       <form action="" method="post">
         <div class="input-group mb-3">
-          <input type="email" name="email" class="form-control" placeholder="Email">
+          <input type="email" class="form-control" name="email" placeholder="Email">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -52,7 +57,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" name="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" name="password" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>

@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!isset($_SESSION['loggedin'])){
+  header("Location:index.php");
+
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -121,7 +129,9 @@
 
                   <p>Unique Visitors</p>
                 </div>
-
+                <div class="icon">
+                  <i class="ion ion-pie-graph"></i>
+                </div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
@@ -141,7 +151,7 @@
                   </h3>
                 </div><!-- /.card-header -->
                 <div class="card-body text-center">
-                  <img src="dist/img/defensive-driving-1.jpg" alt="">
+                  <img src="dist/img/welcome.jpg" alt="">
                 </div><!-- /.card-body -->
               </div>
               <!-- /.card -->
